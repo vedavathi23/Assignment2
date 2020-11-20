@@ -1,0 +1,186 @@
+<div class="container contborder">
+
+    <!-- Start Registration Form Here-->
+    <h1>Registration Form</h1>
+    <hr>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+    <div class="formborder">
+        <form class="formfield" [formGroup]="registerform" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstname">First Name:<span style="color: red;">*</span></label>
+                        <input type="text" name="firstname" id="firstname" formControlName="firstname"
+                            placeholder="Enter your first name">
+                        <div *ngIf="f.firstname.touched && f.firstname?.errors" class="text.error invalid">
+                            <div *ngIf="f.firstname?.errors.required">
+                                First Name is required
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name:<span style="color: red;">*</span></label>
+                        <input type="text" name="lastname" id="lastname" formControlName="lastname"
+                            placeholder="Enter your last name">
+                        <div *ngIf="f.lastname.touched && f.lastname?.errors" class="text.error">
+                            <div *ngIf="f.lastname?.errors.required" class="text-error invalid">
+                                Last Name is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:<span style="color: red;">*</span></label>
+                        <input type="email" name="email" id="email" formControlName="email"
+                            placeholder="Enter your email ">
+                        <div *ngIf="f.email.touched && f.email?.errors" class="text.error invalid">
+                            <div *ngIf="f.email?.errors.required">
+                                Email is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">DOB:<span style="color: red;">*</span></label>
+                        <input type="date" name="dob" id="dob" formControlName="dob" max="2999-12-31"
+                            placeholder="mm/dd/yyyy">
+                        <div *ngIf="f.dob.touched && f.dob?.errors" class="text.error invalid">
+                            <div *ngIf="f.dob?.errors.required">
+                                Date of birth is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:<span style="color: red;">*</span></label>
+                        <input type="text" name="phone" id="phone" (keypress)="_numberOnly($event)"
+                            formControlName="phone" placeholder="Enter your phone number" minlength="1"
+                            maxlength="10">&nbsp;
+                        <i class="fa fa-plus" aria-hidden="true" (click)="addmore();"></i>
+                        <div *ngIf="f.phone.touched && f.phone?.errors" class="text.error invalid">
+                            <div *ngIf="f.phone?.errors.required">
+                                Phone is required
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" *ngFor="let phone of words2; let in=index">
+                        <label for="phone"></label>
+                        <input type="text" maxlength="10" name="phone2" formControlName="phone2"
+                            placeholder="Enter your phone number {{in}}" class="addphone">&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true" (click)="deletemore(i)"></i>
+                        <div *ngIf="f.phone2.touched && f.phone2?.errors" class="text.error invalid">
+                            <div *ngIf="f.phone2?.errors.required">
+                                Phone is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="address" class="labeladd">Address:<span style="color: red;">*</span></label>
+                        <textarea id="address" name="address" formControlName="address" rows="4" cols="50"
+                            placeholder=" Enter your full address"></textarea>
+                        <div *ngIf="f.address.touched && f.address?.errors" class="text.error rightinvalid">
+                            <div *ngIf="f.address?.errors.required">
+                                Address is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:<span style="color: red;">*</span></label>
+                        <select name="country" id="country" (change)='onOptionsSelected()' formControlName="country">
+                            <option value="">Select Country...</option>
+                            <option value="india">India</option>
+                            <option value="america">American</option>
+                            <option value="australia">Austrlia</option>
+                            <option value="canada">Canada</option>
+
+                        </select>
+                        <div *ngIf="f.country.touched && f.country?.errors" class="text.error rightinvalid">
+                            <div *ngIf="f.country?.errors.required">
+                                Country is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="show">
+                        <label for="state">State:<span style="color: red;">*</span></label>
+                        <select name="state" id="state" formControlName="state">
+                            <option value="">Select a state...</option>
+                            <option value="andhrapradesh">Andhra Pradesh</option>
+                            <option value="telangana">Telangana</option>
+                            <option value="california">California</option>
+                            <option value="karnataka">Karnataka</option>
+                        </select>
+                        <div *ngIf="f.state.touched && f.state?.errors" class="text.error rightinvalid">
+                            <div *ngIf="f.state?.errors.required">
+                                State is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">Zip:<span style="color: red;">*</span></label>
+                        <input type="text" name="zip" formControlName="zip" id="zip" placeholder="your zip"
+                            minlength="1" maxlength="6">
+                        <div *ngIf="f.zip.touched && f.zip?.errors" class="text.error rightinvalid">
+                            <div *ngIf="f.zip?.errors.required">
+                                zip is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button"><button type="reset" class="btn btn-secondary"
+                            [disabled]="!registerform.valid">RESET</button>&nbsp;
+                        <button type="save" class="btn btn-primary" [disabled]="!registerform.valid">SAVE</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- End Registration Form Here-->
+
+
+    <!-- Start Registred User   Here-->
+    <div>
+        <h1 class="Registreduser">Registred User</h1>
+        <span><button type="button" class="deletebutton" (click)="delete()">DELETE
+                SELECTED</button></span>
+        <hr>
+        <div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            <input (change)="checktrueall(user)" type="checkbox" style="width: 30px;">
+                        </th>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                        <th>Date Of Birth</th>
+                        <th>Phone(s)</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td colspan="7" *ngIf="this.registerArray.length == 0">
+                            <p>No-data</p>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let user of registerArray">
+                        <td><input (change)="checktrue(user)" [(ngModel)]="user.check" type="checkbox"> </td>
+                        <td style="word-break: break-word;width: 20%;">{{user.firstname}} {{user.lastname}}</td>
+                        <td>{{user.email}}</td>
+                        <td styel="width: 10%;">{{user.dob}}</td>
+                        <td>{{user.phone}} <br>{{user.phone2}}</td>
+                        <td>{{user.address}}, {{user.state}}, {{user.country}}, {{user.zip}}</td>
+                        <td (click)="deleteRow(user)"><i class="fa fa-trash" aria-hidden="true"></i></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- End Registred User Here-->
+</div>

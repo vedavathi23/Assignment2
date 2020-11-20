@@ -1,0 +1,99 @@
+.contborder{
+    border: 1px solid gray;
+}
+input{
+    width: 75%;
+}
+#firstname{
+    margin-left: 10px;
+}
+#lastname{
+    margin-left: 10px;
+}
+#email{
+    margin-left: 45px;
+}
+#dob{
+    margin-left: 50px;
+}
+#phone{
+    margin-left: 36px
+}
+#phone1{
+    margin-left: 89px;
+}
+.addphone{
+    margin-left: 90px;
+}
+/* #phone2{
+    margin-left: 15%;
+}
+#phone3{
+    margin-left: 15%;
+} */
+
+.labeladd{
+    float: left;
+}
+select{
+    width: 75%;
+}
+#address{
+    margin-left: 12px;
+}
+table thead th:nth-child(6){
+    width: 20%;
+}
+td{
+    word-break: break-all;
+}
+table thead th:nth-child(5){
+    width: 20%;
+}
+#country{
+    margin-left: 10px;
+}
+#state{
+    margin-left: 31px;
+}
+#zip{
+    margin-left: 46px;
+}
+
+.button{
+    margin-left: 102px;
+    margin-top: 15px;
+}
+.formborder{
+    border: 1px solid gray;
+}
+.formfield{
+    margin-top: 25px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+}
+
+.deletebutton{
+    float: right;
+    margin-top: -37px;
+}
+.Registreduser{
+margin-top: 70px;
+    
+}
+.invalid{
+    margin-left: 100px;
+    color: red;
+    font-size: 14px;
+}
+
+/* .text.error{
+    margin-left: 95px;
+} */
+
+.rightinvalid{
+    margin-left: 82px;
+    color: red;
+    font-size: 14px;
+
+}
